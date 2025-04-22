@@ -1,0 +1,41 @@
+Dufort–Frankel Scheme – Theory Notes
+------------------------------------------------
+
+Purpose:
+The Dufort–Frankel scheme is an explicit numerical method used to solve parabolic PDEs like the heat (diffusion) equation.
+
+Example PDE:
+    ∂u/∂t = α ∂²u/∂x²
+
+Key Features:
+- Explicit method
+- Unconditionally stable (more stable than FTCS)
+- Second-order accuracy in time
+
+Discretization:
+Let u_i^n ≈ u(x_i, t^n), r = α Δt / (Δx)^2
+
+Uses three time levels: u_i^{n+1}, u_i^n, and u_i^{n-1}
+
+Update formula:
+    u_i^{n+1} = [(1 - 2r) * u_i^{n-1} + 2r * (u_{i-1}^n + u_{i+1}^n)] / (1 + 2r)
+
+Requires:
+- Initial values u_i^0 (from the initial condition)
+- First step (n = 1) computed separately using FTCS
+
+Stability:
+- More stable than FTCS
+- Can use larger time steps without instability
+
+Advantages:
+- More efficient than Crank–Nicolson for explicit implementations
+- Good for diffusion-type problems
+
+Limitations:
+- More complex than FTCS
+- Needs two initial time levels
+
+Exact Solution for Testing:
+    For u(x, 0) = sin(πx), the exact solution at time t is:
+    u(x, t) = exp(-π²αt) * sin(πx)

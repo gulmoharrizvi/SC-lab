@@ -1,0 +1,39 @@
+MacCormack Scheme – Theory Notes
+--------------------------------------------
+
+Purpose:
+The MacCormack scheme is a two-step predictor-corrector method used to solve hyperbolic partial differential equations, such as the linear advection equation.
+
+Example PDE:
+    ∂u/∂t + a ∂u/∂x = 0,      where a > 0
+
+Key Features:
+- Explicit method
+- Second-order accuracy in both time and space
+- Suitable for wave and transport equations
+
+Discretization:
+Let u_i^n ≈ u(x_i, t^n), Δx = space step, Δt = time step
+
+Predictor step (Forward difference in space):
+    u_i* = u_i^n - (a Δt / Δx) * (u_{i+1}^n - u_i^n)
+
+Corrector step (Backward difference in space):
+    u_i^{n+1} = 0.5 * [u_i^n + u_i* - (a Δt / Δx) * (u_i* - u_{i-1}*)]
+
+Stability Condition:
+The CFL condition must be satisfied:
+    a * Δt / Δx ≤ 1
+
+Advantages:
+- Higher accuracy than simple upwind schemes
+- Simple and efficient for advection-dominated problems
+
+Limitations:
+- Conditional stability
+- Not suitable for diffusion-dominated problems
+
+Exact Solution for Testing:
+    For initial condition u(x, 0) = sin(2πx), the exact solution at time t is:
+    u(x, t) = sin(2π(x - at))
+
